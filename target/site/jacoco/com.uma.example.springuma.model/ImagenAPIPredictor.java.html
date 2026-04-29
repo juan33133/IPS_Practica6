@@ -48,7 +48,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 <span class="nc bnc" id="L48" title="All 2 branches missed.">            for (Map&lt;String, Object&gt; entry : responseList) {</span>
 <span class="nc" id="L49">                resultMap.put((String) entry.get(&quot;label&quot;), (Double) entry.get(&quot;score&quot;));</span>
 
-            }
+<span class="nc" id="L51">            }</span>
 <span class="nc" id="L52">            return resultMap;</span>
         } else {
 <span class="nc" id="L54">            Map&lt;String, Object&gt; responseMap = mapper.readValue(jsonResponse, new TypeReference&lt;Map&lt;String, Object&gt;&gt;() {</span>

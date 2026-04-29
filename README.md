@@ -1,6 +1,9 @@
 # SpringUMA — Medical Records System
 
-> ⚠️ Replace `juan33133` and `` with your actual GitHub account details.
+![Build Status](https://github.com/juan33133/IPS_Practica6/actions/workflows/ci.yml/badge.svg)
+![Test Results](https://github.com/juan33133/IPS_Practica6/actions/workflows/ci.yml/badge.svg?event=push)
+![Coverage](https://github.com/juan33133/IPS_Practica6/blob/main/.github/badges/jacoco.svg?raw=true)
+![Branches](https://github.com/juan33133/IPS_Practica6/blob/main/.github/badges/branches.svg?raw=true)
 
 A Spring Boot REST API that models a small medical records system. Built as a practice project for the **Software Maintenance and Testing** course at the University of Málaga.
 

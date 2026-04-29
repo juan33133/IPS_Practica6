@@ -17,11 +17,11 @@ import java.util.zip.Inflater;
 <span class="fc bfc" id="L17" title="All 2 branches covered.">        while (!deflater.finished()) {</span>
 <span class="fc" id="L18">            int size = deflater.deflate(tmp);</span>
 <span class="fc" id="L19">            outputStream.write(tmp, 0, size);</span>
-        }
+<span class="fc" id="L20">        }</span>
         try {
 <span class="fc" id="L22">            outputStream.close();</span>
-<span class="pc" id="L23">        } catch (Exception ignored) {</span>
-        }
+<span class="nc" id="L23">        } catch (Exception ignored) {</span>
+<span class="fc" id="L24">        }</span>
 <span class="fc" id="L25">        return outputStream.toByteArray();</span>
     }
 
@@ -34,10 +34,10 @@ import java.util.zip.Inflater;
 <span class="fc bfc" id="L34" title="All 2 branches covered.">            while (!inflater.finished()) {</span>
 <span class="fc" id="L35">                int count = inflater.inflate(tmp);</span>
 <span class="fc" id="L36">                outputStream.write(tmp, 0, count);</span>
-            }
+<span class="fc" id="L37">            }</span>
 <span class="fc" id="L38">            outputStream.close();</span>
-<span class="pc" id="L39">        } catch (Exception ignored) {</span>
-        }
+<span class="nc" id="L39">        } catch (Exception ignored) {</span>
+<span class="fc" id="L40">        }</span>
 <span class="fc" id="L41">        return outputStream.toByteArray();</span>
     }
 

@@ -30,8 +30,8 @@ import com.uma.example.springuma.model.MedicoService;
         try {
 <span class="fc" id="L31">            medicoService.addMedico(medico);</span>
 <span class="fc" id="L32">            return ResponseEntity.status(201).build();</span>
-<span class="nc" id="L33">        } catch (Exception e) {</span>
-<span class="nc" id="L34">            return ResponseEntity.internalServerError().body(&quot;El medico ya existe&quot;);</span>
+<span class="fc" id="L33">        } catch (Exception e) {</span>
+<span class="fc" id="L34">            return ResponseEntity.internalServerError().body(&quot;El medico ya existe&quot;);</span>
         }
     }
 
