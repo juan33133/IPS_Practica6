@@ -43,14 +43,14 @@ jobs:
 
       # ── 6. Publish test report (GitHub Checks tab) ──────────────────────
       - name: Publish Test Report
-        uses: dorny/test-reporter@v1
+        uses: mikepenz/action-junit-report@v4
         if: always()
         with:
-          name: Test Results
-          path: |
+          report_paths: |
             target/surefire-reports/TEST-*.xml
             target/failsafe-reports/TEST-*.xml
-          reporter: java-junit
+          include_passed: true
+          check_name: Test Results
 
       # ── 7. Upload test report artifacts ─────────────────────────────────
       - name: Upload Test Reports
