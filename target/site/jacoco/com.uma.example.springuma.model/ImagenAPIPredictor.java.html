@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImagenAPIPredictor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springuma</a> &gt; <a href="index.source.html" class="el_package">com.uma.example.springuma.model</a> &gt; <span class="el_source">ImagenAPIPredictor.java</span></div><h1>ImagenAPIPredictor.java</h1><pre class="source lang-java linenums">package com.uma.example.springuma.model;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+<span class="nc" id="L18">public class ImagenAPIPredictor {</span>
+    //Class that is responsible for creating API call to external API service which will predict imagage.
+    //Call in this version is based on the path of the image, but i checked if it works from our spring project
+
+    private static final String API_URL = &quot;https://api-inference.huggingface.co/models/MUmairAB/Breast_Cancer_Detector&quot;;
+    // @TODO: replace USE_TOKEN_HERE with your token
+    private static final String TOKEN = &quot;Bearer USE_TOKEN_HERE&quot;;
+
+    public static Map&lt;String, Double&gt; query(byte[] file_data) throws IOException, Exception {
+
+<span class="nc" id="L28">        byte[] data = file_data;</span>
+<span class="nc" id="L29">        try (CloseableHttpClient client = HttpClients.createDefault()) {</span>
+<span class="nc" id="L30">            HttpPost request = new HttpPost(API_URL);</span>
+<span class="nc" id="L31">            request.setHeader(&quot;Authorization&quot;, TOKEN);</span>
+<span class="nc" id="L32">            request.setEntity(new ByteArrayEntity(data));</span>
+
+<span class="nc" id="L34">            HttpResponse response = client.execute(request);</span>
+<span class="nc" id="L35">            String jsonResponse = EntityUtils.toString(response.getEntity());</span>
+<span class="nc" id="L36">            return processResponse(jsonResponse);</span>
+<span class="nc" id="L37">        } catch (Exception e) {</span>
+<span class="nc" id="L38">            throw new Exception(e.getMessage());</span>
+        }
+    }
+
+    private static Map&lt;String, Double&gt; processResponse(String jsonResponse) throws Exception {
+<span class="nc" id="L43">        ObjectMapper mapper = new ObjectMapper();</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (jsonResponse.trim().startsWith(&quot;[&quot;)) {</span>
+<span class="nc" id="L45">            List&lt;Map&lt;String, Object&gt;&gt; responseList = mapper.readValue(jsonResponse, new TypeReference&lt;List&lt;Map&lt;String, Object&gt;&gt;&gt;() {</span>
+            });
+<span class="nc" id="L47">            Map&lt;String, Double&gt; resultMap = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            for (Map&lt;String, Object&gt; entry : responseList) {</span>
+<span class="nc" id="L49">                resultMap.put((String) entry.get(&quot;label&quot;), (Double) entry.get(&quot;score&quot;));</span>
+
+            }
+<span class="nc" id="L52">            return resultMap;</span>
+        } else {
+<span class="nc" id="L54">            Map&lt;String, Object&gt; responseMap = mapper.readValue(jsonResponse, new TypeReference&lt;Map&lt;String, Object&gt;&gt;() {</span>
+            });
+<span class="nc bnc" id="L56" title="All 2 branches missed.">            if (responseMap.containsKey(&quot;error&quot;)) {</span>
+<span class="nc" id="L57">                throw new Exception(&quot;Error from API: &quot; + responseMap.get(&quot;error&quot;));</span>
+            } else {
+<span class="nc" id="L59">                throw new Exception(&quot;Unexpected response format: &quot; + jsonResponse);</span>
+            }
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

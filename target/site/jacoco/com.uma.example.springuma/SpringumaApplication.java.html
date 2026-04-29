@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SpringumaApplication.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springuma</a> &gt; <a href="index.source.html" class="el_package">com.uma.example.springuma</a> &gt; <span class="el_source">SpringumaApplication.java</span></div><h1>SpringumaApplication.java</h1><pre class="source lang-java linenums">package com.uma.example.springuma;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+@SpringBootApplication
+<span class="fc" id="L14">public class SpringumaApplication {</span>
+
+    public static void main(String[] args) {
+<span class="nc" id="L17">        SpringApplication.run(SpringumaApplication.class, args);</span>
+<span class="nc" id="L18">    }</span>
+
+    @Bean
+    public CorsFilter corsFilter() {
+<span class="fc" id="L22">        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();</span>
+<span class="fc" id="L23">        final CorsConfiguration config = new CorsConfiguration();</span>
+<span class="fc" id="L24">        config.setAllowCredentials(false);</span>
+        // Don't do this in production, use a proper list  of allowed origins
+<span class="fc" id="L26">        config.setAllowedOrigins(Collections.singletonList(&quot;http://localhost:4200&quot;));</span>
+<span class="fc" id="L27">        config.setAllowedHeaders(Arrays.asList(&quot;Origin&quot;, &quot;Content-Type&quot;, &quot;Accept&quot;));</span>
+<span class="fc" id="L28">        config.setAllowedMethods(Arrays.asList(&quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;OPTIONS&quot;, &quot;DELETE&quot;, &quot;PATCH&quot;));</span>
+<span class="fc" id="L29">        source.registerCorsConfiguration(&quot;/**&quot;, config);</span>
+<span class="fc" id="L30">        return new CorsFilter(source);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InformeService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springuma</a> &gt; <a href="index.source.html" class="el_package">com.uma.example.springuma.model</a> &gt; <span class="el_source">InformeService.java</span></div><h1>InformeService.java</h1><pre class="source lang-java linenums">package com.uma.example.springuma.model;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+
+@Service
+<span class="fc" id="L12">public class InformeService {</span>
+
+    @Autowired
+    private RepositoryInforme repositoryInforme;
+
+    public List&lt;Informe&gt; getAllInformes() {
+<span class="nc" id="L18">        return repositoryInforme.findAll();</span>
+    }
+
+    public Informe getInforme(Long id) {
+<span class="fc" id="L22">        return repositoryInforme.findById(id).orElse(null);</span>
+    }
+
+    public Informe addInforme(Informe informe) throws IOException, Exception {
+<span class="fc" id="L26">        String neew_pred = getNewPrediccion(informe);</span>
+        //double neew_pred = Math.random();
+<span class="fc" id="L28">        System.out.println(neew_pred);</span>
+<span class="fc" id="L29">        informe.setPrediccion(((neew_pred)));</span>
+
+<span class="fc" id="L31">        return repositoryInforme.saveAndFlush(informe);</span>
+    }
+
+    public void updateInforme(Informe informe) throws IOException, Exception {
+        // Puedes implementar la lógica de actualización según tus necesidades
+        // Aquí se muestra un ejemplo básico:
+<span class="nc" id="L37">        Informe existingInforme = repositoryInforme.findById(informe.getId()).orElse(null);</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        if (existingInforme != null) {</span>
+<span class="nc" id="L39">            existingInforme.setPrediccion(getNewPrediccion(existingInforme));</span>
+<span class="nc" id="L40">            existingInforme.setContenido(informe.getContenido());</span>
+<span class="nc" id="L41">            repositoryInforme.save(existingInforme);</span>
+        }
+<span class="nc" id="L43">    }</span>
+
+    public void removeInforme(Informe informe) {
+<span class="nc" id="L46">        repositoryInforme.delete(informe);</span>
+<span class="nc" id="L47">    }</span>
+
+    public void removeInformeByID(Long id) {
+<span class="fc" id="L50">        repositoryInforme.deleteById(id);</span>
+<span class="fc" id="L51">    }</span>
+
+    public List&lt;Informe&gt; getInformesImagen(Long id) {
+<span class="fc" id="L54">        return repositoryInforme.findByImagenId(id);</span>
+    }
+
+    public String getNewPrediccion(Informe informe) throws IOException, Exception {
+        /*Map&lt;String, Double&gt; response =  ImagenAPIPredictor
+        .query(ImageUtils.decompressImage(repositoryImage.getReferenceById(informe.getImagen().getId())
+        .getFile_content()));
+        //informe.setPrediccion((String)response.get(&quot;0&quot;));
+        System.out.println(&quot;resp&quot;);
+        System.out.println( response);
+        double score_0 = response.get(&quot;LABEL_0&quot;);
+        double score_1 = response.get(&quot;LABEL_1&quot;);*/
+
+<span class="fc" id="L67">        double score_0 = Math.random();</span>
+<span class="fc" id="L68">        double score_1 = Math.random();</span>
+        String resulString;
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (score_0 &gt; score_1) {</span>
+<span class="fc" id="L71">            resulString = &quot;{\&quot;status\&quot;: \&quot;Not cancer\&quot;,  \&quot;score\&quot;: &quot; + score_0 + &quot;}&quot;;</span>
+<span class="fc" id="L72">        } else {</span>
+<span class="fc" id="L73">            resulString = &quot;{\&quot;status\&quot;: \&quot;Cancer\&quot;,  \&quot;score\&quot;: &quot; + score_1 + &quot;}&quot;;</span>
+        }
+<span class="fc" id="L75">        return resulString;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

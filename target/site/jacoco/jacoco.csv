@@ -1,0 +1,19 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+springuma,com.uma.example.springuma,SpringumaApplication,5,74,0,0,2,9,1,2,1,2
+springuma,com.uma.example.springuma,ServletInitializer,12,0,0,0,2,0,2,0,2,0
+springuma,com.uma.example.springuma.model,PacienteService,9,31,0,0,3,8,2,6,2,6
+springuma,com.uma.example.springuma.model,ImagenAPIPredictor,116,0,6,0,22,0,6,0,3,0
+springuma,com.uma.example.springuma.model,Informe,38,31,4,0,8,14,6,9,4,9
+springuma,com.uma.example.springuma.model,InformeService,36,54,2,2,9,16,4,7,3,6
+springuma,com.uma.example.springuma.model,Paciente,41,60,6,0,9,27,6,14,3,14
+springuma,com.uma.example.springuma.model,ImagenAPIPredictor.new TypeReference() {...},3,0,0,0,1,0,1,0,1,0
+springuma,com.uma.example.springuma.model,Medico,29,39,4,0,7,15,5,10,3,10
+springuma,com.uma.example.springuma.model,ImagenAPIPredictor.new TypeReference() {...},3,0,0,0,1,0,1,0,1,0
+springuma,com.uma.example.springuma.model,Imagen,48,38,8,0,14,17,8,11,4,11
+springuma,com.uma.example.springuma.model,ImagenService,27,76,2,2,9,21,6,7,4,7
+springuma,com.uma.example.springuma.model,MedicoService,9,31,0,0,3,8,2,6,2,6
+springuma,com.uma.example.springuma.controller,PacienteController,19,46,1,1,8,12,1,6,0,6
+springuma,com.uma.example.springuma.controller,ImagenController,16,47,0,0,6,13,0,7,0,7
+springuma,com.uma.example.springuma.controller,InformeController,14,29,0,0,6,7,0,5,0,5
+springuma,com.uma.example.springuma.controller,MedicoController,18,58,2,2,7,17,2,6,0,6
+springuma,com.uma.example.springuma.utils,ImageUtils,5,75,0,4,1,22,1,4,1,2

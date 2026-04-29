@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springuma</a> &gt; <a href="index.source.html" class="el_package">com.uma.example.springuma.utils</a> &gt; <span class="el_source">ImageUtils.java</span></div><h1>ImageUtils.java</h1><pre class="source lang-java linenums">package com.uma.example.springuma.utils;
+
+import java.io.ByteArrayOutputStream;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
+
+<span class="nc" id="L7">public class ImageUtils {</span>
+
+    public static byte[] compressImage(byte[] data) {
+<span class="fc" id="L10">        Deflater deflater = new Deflater();</span>
+<span class="fc" id="L11">        deflater.setLevel(Deflater.BEST_COMPRESSION);</span>
+<span class="fc" id="L12">        deflater.setInput(data);</span>
+<span class="fc" id="L13">        deflater.finish();</span>
+
+<span class="fc" id="L15">        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);</span>
+<span class="fc" id="L16">        byte[] tmp = new byte[4 * 1024];</span>
+<span class="fc bfc" id="L17" title="All 2 branches covered.">        while (!deflater.finished()) {</span>
+<span class="fc" id="L18">            int size = deflater.deflate(tmp);</span>
+<span class="fc" id="L19">            outputStream.write(tmp, 0, size);</span>
+        }
+        try {
+<span class="fc" id="L22">            outputStream.close();</span>
+<span class="pc" id="L23">        } catch (Exception ignored) {</span>
+        }
+<span class="fc" id="L25">        return outputStream.toByteArray();</span>
+    }
+
+    public static byte[] decompressImage(byte[] data) {
+<span class="fc" id="L29">        Inflater inflater = new Inflater();</span>
+<span class="fc" id="L30">        inflater.setInput(data);</span>
+<span class="fc" id="L31">        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);</span>
+<span class="fc" id="L32">        byte[] tmp = new byte[4 * 1024];</span>
+        try {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            while (!inflater.finished()) {</span>
+<span class="fc" id="L35">                int count = inflater.inflate(tmp);</span>
+<span class="fc" id="L36">                outputStream.write(tmp, 0, count);</span>
+            }
+<span class="fc" id="L38">            outputStream.close();</span>
+<span class="pc" id="L39">        } catch (Exception ignored) {</span>
+        }
+<span class="fc" id="L41">        return outputStream.toByteArray();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

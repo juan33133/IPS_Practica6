@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MedicoService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springuma</a> &gt; <a href="index.source.html" class="el_package">com.uma.example.springuma.model</a> &gt; <span class="el_source">MedicoService.java</span></div><h1>MedicoService.java</h1><pre class="source lang-java linenums">package com.uma.example.springuma.model;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+<span class="fc" id="L9">public class MedicoService {</span>
+
+    @Autowired
+    RepositoryMedico repositoryMedico;
+
+    public List&lt;Medico&gt; getAllMedicos() {
+<span class="nc" id="L15">        return repositoryMedico.findAll();</span>
+    }
+
+    public Medico getMedico(Long id) {
+<span class="fc" id="L19">        return repositoryMedico.getReferenceById(id);</span>
+    }
+
+    public Medico addMedico(Medico m) {
+<span class="fc" id="L23">        return repositoryMedico.saveAndFlush(m);</span>
+    }
+
+    public void updateMedico(Medico m) {
+<span class="fc" id="L27">        repositoryMedico.save(m);</span>
+<span class="fc" id="L28">    }</span>
+
+    public void removeMedico(Medico m) {
+<span class="nc" id="L31">        repositoryMedico.delete(m);</span>
+<span class="nc" id="L32">    }</span>
+
+    public void removeMedicoID(Long id) {
+<span class="fc" id="L35">        repositoryMedico.deleteById(id);</span>
+<span class="fc" id="L36">    }</span>
+
+    public Medico getMedicoByDni(String dni) {
+<span class="fc" id="L39">        return repositoryMedico.getMedicoByDni(dni);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

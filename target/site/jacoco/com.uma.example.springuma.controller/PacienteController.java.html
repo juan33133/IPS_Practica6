@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PacienteController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">springuma</a> &gt; <a href="index.source.html" class="el_package">com.uma.example.springuma.controller</a> &gt; <span class="el_source">PacienteController.java</span></div><h1>PacienteController.java</h1><pre class="source lang-java linenums">package com.uma.example.springuma.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.uma.example.springuma.model.Paciente;
+import com.uma.example.springuma.model.PacienteService;
+
+@RestController
+<span class="fc" id="L20">public class PacienteController {</span>
+
+    @Autowired
+    private PacienteService pacienteService;
+
+    @GetMapping(&quot;/paciente/{id}&quot;)
+    public Paciente getPaciente(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L27">        return pacienteService.getPaciente(id);</span>
+    }
+
+    @GetMapping(&quot;/paciente/medico/{id}&quot;)
+    public List&lt;Paciente&gt; getPacientes(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L32">        return pacienteService.getPacientesMedico(id);</span>
+    }
+
+    @PostMapping(value = &quot;/paciente&quot;, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity&lt;?&gt; savePaciente(@RequestBody Paciente paciente) {
+        try {
+<span class="fc" id="L38">            pacienteService.addPaciente(paciente);</span>
+<span class="fc" id="L39">            return ResponseEntity.status(201).build();</span>
+<span class="nc" id="L40">        } catch (Exception e) {</span>
+<span class="nc" id="L41">            return ResponseEntity.internalServerError().body(&quot;El paciente ya existe&quot;);</span>
+        }
+    }
+
+    @PutMapping(value = &quot;/paciente&quot;, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity&lt;?&gt; updateCuenta(@RequestBody Paciente paciente) {
+        try {
+<span class="fc" id="L48">            pacienteService.updatePaciente(paciente);</span>
+<span class="fc" id="L49">            return ResponseEntity.noContent().build();</span>
+<span class="nc" id="L50">        } catch (Exception e) {</span>
+<span class="nc" id="L51">            e.printStackTrace();</span>
+<span class="nc" id="L52">            return ResponseEntity.internalServerError().body(&quot;Error al actualizar el paciente &quot;);</span>
+        }
+    }
+
+    @DeleteMapping(&quot;/paciente/{id}&quot;)
+    public ResponseEntity&lt;?&gt; deleteCuenta(@PathVariable(&quot;id&quot;) Long id) {
+        try {
+<span class="fc" id="L59">            Paciente paciente = pacienteService.getPaciente(id);</span>
+<span class="fc" id="L60">            System.out.println(paciente);</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">            if (paciente != null) {</span>
+<span class="fc" id="L62">                pacienteService.removePaciente(paciente);</span>
+<span class="fc" id="L63">                return ResponseEntity.ok().build();</span>
+            } else {
+<span class="nc" id="L65">                return ResponseEntity.internalServerError().build();</span>
+            }
+<span class="nc" id="L67">        } catch (Exception e) {</span>
+<span class="nc" id="L68">            return ResponseEntity.internalServerError().build();</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
